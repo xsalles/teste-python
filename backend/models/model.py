@@ -1,5 +1,6 @@
 from database import db
 from datetime import datetime
+from sqlalchemy import ForeignKey
 
 class SystemInfo(db.Model):
     __tablename__ = 'devices'
@@ -16,13 +17,13 @@ class SystemInfo(db.Model):
     os_version = db.Column(db.String(100), nullable=True)
     location = db.Column(db.String(100), nullable=True)
 
-    # hardware information
+    # foreign key to hardware information
 
-    cpu = db.Column(db.Text, nullable=True)
-    ram_memory = db.Column(db.String(100), nullable=True)
-    disk = db.Column(db.Text, nullable=True)
-    network = db.Column(db.Text, nullable=True)
-    bios = db.Column(db.Text, nullable=True)
+    cpu_id = db.Column(db.Integer, ForeignKey('cpus.id'), nullable=True)
+    ram_memory_id = db.Column(db.Integer, ForeignKey('ram_memories.id'), nullable=True)
+    disk_id = db.Column(db.Integer, ForeignKey('disks.id'), nullable=True)
+    network_id = db.Column(db.Text, ForeignKey('networks.id'), nullable=True)
+    bios_id = db.Column(db.Text, ForeignKey('bios.id'), nullable=True)
 
     # software information
 
@@ -37,6 +38,14 @@ class SystemInfo(db.Model):
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # relationsships
+
+    cpu = db.relationship("CPU", foreign_keys=[cpu_id])
+    ram_memory = db.relationship("ram_memory", foreign_keys=[ram_memory_id])
+    disk = db.relationship("Disk", foreign_keys=[disk_id])
+    network = db.relationship("Network", foreign_keys=[network_id])
+    bios = db.relationship("BIOS", foreign_keys=[bios_id])
     
     def to_dict(self):
         return {
