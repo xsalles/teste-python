@@ -14,9 +14,6 @@ CORS(app)
 db.init_app(app)
 init_db(app)
 
-with app.app_context():
-    db.create_all()
-
 @app.route('/')
 def index():
     return "Welcome to the System Information API!"
