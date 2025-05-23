@@ -14,6 +14,10 @@ CORS(app)
 db.init_app(app)
 init_db(app)
 
+@app.route('/')
+def index():
+    return "Welcome to the System Information API!"
+
 @app.route('/system_info', methods=['POST'])
 def create_system_info():
     data = request.get_json()
@@ -26,6 +30,7 @@ def create_system_info():
     
     return jsonify({"message": "System information received successfully!"}), 201
 
+@app.route('/system_info', methods=['GET'])
 def get_system_info():
     systems = SystemInfo.query.all()
     
