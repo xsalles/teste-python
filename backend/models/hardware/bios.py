@@ -1,4 +1,4 @@
-from database import db
+from db_config import db
 
 class BIOS(db.Model):
     __tablename__ = 'bios'

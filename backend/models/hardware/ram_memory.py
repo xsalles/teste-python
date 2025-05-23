@@ -1,6 +1,6 @@
-from database import db
+from db_config import db
 
-class ram_emory(db.Model):
+class RamMemory(db.Model):
     __tablename__ = 'ram_memories'
 
     id = db.Column(db.Integer, primary_key=True)

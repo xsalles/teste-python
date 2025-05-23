@@ -1,4 +1,4 @@
-from database import db
+from db_config import db
 from datetime import datetime
 from sqlalchemy import ForeignKey
 
@@ -22,8 +22,8 @@ class SystemInfo(db.Model):
     cpu_id = db.Column(db.Integer, ForeignKey('cpus.id'), nullable=True)
     ram_memory_id = db.Column(db.Integer, ForeignKey('ram_memories.id'), nullable=True)
     disk_id = db.Column(db.Integer, ForeignKey('disks.id'), nullable=True)
-    network_id = db.Column(db.Text, ForeignKey('networks.id'), nullable=True)
-    bios_id = db.Column(db.Text, ForeignKey('bios.id'), nullable=True)
+    network_id = db.Column(db.Integer, ForeignKey('networks.id'), nullable=True)
+    bios_id = db.Column(db.Integer, ForeignKey('bios.id'), nullable=True)
 
     # software information
 
@@ -42,7 +42,7 @@ class SystemInfo(db.Model):
     # relationsships
 
     cpu = db.relationship("CPU", foreign_keys=[cpu_id])
-    ram_memory = db.relationship("ram_memory", foreign_keys=[ram_memory_id])
+    ram_memory = db.relationship("RamMemory", foreign_keys=[ram_memory_id])
     disk = db.relationship("Disk", foreign_keys=[disk_id])
     network = db.relationship("Network", foreign_keys=[network_id])
     bios = db.relationship("BIOS", foreign_keys=[bios_id])

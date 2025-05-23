@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from backend.models.model import SystemInfo
-from database import db, init_db
+from models.model import SystemInfo
+from db_config import db, init_db
 from dotenv import load_dotenv
 import os
 
