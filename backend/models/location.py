@@ -8,6 +8,7 @@ class Location(db.Model):
     state = db.Column(db.String(200), nullable=True)
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
+    device_id = db.Column(db.Integer, db.ForeignKey('devices.id'), nullable=False)
 
     def to_dict(self):
         return {

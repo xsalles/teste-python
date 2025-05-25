@@ -32,13 +32,13 @@ class SystemInfo(db.Model):
     
     # mobile specific
     apps_installed = db.Column(db.Text, nullable=True)
-    geolocation = db.Column(db.String(200), nullable=True)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # relationsships
 
+    geolocation = db.relationship("Location", lazy=True)
     cpu = db.relationship("CPU", foreign_keys=[cpu_id])
     ram_memory = db.relationship("RamMemory", foreign_keys=[ram_memory_id])
     disk = db.relationship("Disk", foreign_keys=[disk_id])
