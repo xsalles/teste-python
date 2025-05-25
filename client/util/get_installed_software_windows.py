@@ -17,5 +17,3 @@ def get_installed_software_windows():
     except Exception as e:
         print(f"Error parsing JSON: {e}")
         return []
-    
-print(get_installed_software_windows())

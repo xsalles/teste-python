@@ -27,7 +27,6 @@ class SystemInfo(db.Model):
 
     # software information
 
-    installed_software = db.Column(db.Text, nullable=True)
     running_processes = db.Column(db.Text, nullable=True)
     active_services = db.Column(db.Text, nullable=True)
     updates = db.Column(db.Text, nullable=True)
@@ -46,6 +45,7 @@ class SystemInfo(db.Model):
     disk = db.relationship("Disk", foreign_keys=[disk_id])
     network = db.relationship("Network", foreign_keys=[network_id])
     bios = db.relationship("BIOS", foreign_keys=[bios_id])
+    installed_software = db.relationship("InstalledSoftware", lazy=True)
     
     def to_dict(self):
         return {
