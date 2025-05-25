@@ -29,8 +29,7 @@ class SystemInfo(db.Model):
 
     running_processes = db.Column(db.Text, nullable=True)
     active_services = db.Column(db.Text, nullable=True)
-    updates = db.Column(db.Text, nullable=True)
-
+    
     # mobile specific
     apps_installed = db.Column(db.Text, nullable=True)
     geolocation = db.Column(db.String(200), nullable=True)
@@ -46,6 +45,7 @@ class SystemInfo(db.Model):
     network = db.relationship("Network", foreign_keys=[network_id])
     bios = db.relationship("BIOS", foreign_keys=[bios_id])
     installed_software = db.relationship("InstalledSoftware", lazy=True)
+    updates = db.relationship("Updates", lazy=True)
     
     def to_dict(self):
         return {
