@@ -4,3 +4,4 @@ flask_sqlalchemy
 pymysql
 requests
 dotenv
+psutil
