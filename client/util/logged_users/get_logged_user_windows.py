@@ -15,8 +15,8 @@ def get_logged_user_windows():
                     parts = line.split()
 
                     logon_time = " ".join(parts[-2:])
-                    return {"username": username, "logon_time": logon_time}
-            return {"username": username, "logon_time": None}
+                    return [{"username": username, "logon_time": logon_time}]
+            return [{"username": username, "logon_time": None}]
         
     except Exception as e:
         print(f"Error retrieving logged users: {e}")

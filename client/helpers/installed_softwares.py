@@ -1,5 +1,7 @@
 import platform
-from util.installed_softwares import get_installed_software_windows, get_installed_software_linux, get_installed_software_mac
+from client.util.installed_softwares.get_installed_software_windows import get_installed_software_windows
+from client.util.installed_softwares.get_installed_software_linux import get_installed_software_linux
+from client.util.installed_softwares.get_installed_software_mac import get_installed_software_mac
 
 def get_installed_softwares():
     os = platform.system().lower()

@@ -1,4 +1,5 @@
-from db_config import db
+from backend.db_config import db
+
 from datetime import datetime
 
 class LoggedUser(db.Model):
@@ -7,6 +8,7 @@ class LoggedUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     logon_time = db.Column(db.String(100), nullable=True)
+    device_id = db.Column(db.String(100), nullable=True)
 
     def to_dict(self):
         return {

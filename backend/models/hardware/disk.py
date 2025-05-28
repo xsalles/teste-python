@@ -1,4 +1,5 @@
-from db_config import db
+from backend.db_config import db
+
 
 class Disk(db.Model):
     __tablename__ = 'disks'
@@ -8,6 +9,7 @@ class Disk(db.Model):
     size = db.Column(db.String(100), nullable=True)
     type = db.Column(db.String(50), nullable=True)
     usage_percent = db.Column(db.String(10), nullable=True)
+
 
     def to_dict(self):
         return {

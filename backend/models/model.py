@@ -1,6 +1,7 @@
-from db_config import db
 from datetime import datetime
 from sqlalchemy import ForeignKey
+from flask_sqlalchemy import SQLAlchemy
+from backend.db_config import db
 
 class SystemInfo(db.Model):
     __tablename__ = 'devices'
@@ -9,7 +10,6 @@ class SystemInfo(db.Model):
 
     # basic information
     hostname = db.Column(db.String(100), nullable=True)
-    serial_number = db.Column(db.String(100), nullable=True)
     equipment_name = db.Column(db.String(200), nullable=True)
     model = db.Column(db.String(100), nullable=True)
     manufacturer = db.Column(db.String(100), nullable=True)
@@ -38,14 +38,11 @@ class SystemInfo(db.Model):
 
     # relationsships
 
-    geolocation = db.relationship("Location", lazy=True)
     cpu = db.relationship("CPU", foreign_keys=[cpu_id])
     ram_memory = db.relationship("RamMemory", foreign_keys=[ram_memory_id])
     disk = db.relationship("Disk", foreign_keys=[disk_id])
     network = db.relationship("Network", foreign_keys=[network_id])
     bios = db.relationship("BIOS", foreign_keys=[bios_id])
-    installed_software = db.relationship("InstalledSoftware", lazy=True)
-    updates = db.relationship("Updates", lazy=True)
     
     def to_dict(self):
         return {

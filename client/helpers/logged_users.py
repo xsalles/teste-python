@@ -1,5 +1,6 @@
 import platform
-from util.logged_users import get_logged_user_windows, get_logged_user_linux_mac
+from client.util.logged_users.get_logged_user_linux_mac import get_logged_user_linux_mac
+from client.util.logged_users.get_logged_user_windows import get_logged_user_windows
 
 
 def get_logged_user():

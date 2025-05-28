@@ -1,4 +1,5 @@
-from db_config import db
+from backend.db_config import db
+
 
 class InstalledSoftware(db.Model):
     __tablename__ = 'installed_softwares'
@@ -7,7 +8,7 @@ class InstalledSoftware(db.Model):
     name = db.Column(db.String(100), nullable=True)
     version = db.Column(db.String(50), nullable=True)
     installation_date = db.Column(db.String(100), nullable=True)
-    device_id = db.Column(db.Integer, db.ForeignKey('devices.id'), nullable=False)
+    device_id = db.Column(db.String(100), nullable=True)
 
     def to_dict(self):
         return {

@@ -1,4 +1,4 @@
-from db_config import db
+from backend.db_config import db
 from datetime import datetime
 
 class Updates(db.Model):
@@ -8,7 +8,7 @@ class Updates(db.Model):
     description = db.Column(db.String(255), nullable=True)
     hotfix_id = db.Column(db.String(50), nullable=True)
     installed_on = db.Column(db.String(50), nullable=True)
-    device_id = db.Column(db.Integer, db.ForeignKey('devices.id'), nullable=False)
+    device_id = db.Column(db.String(100), nullable=True)
     
     def to_dict(self):
         return {
