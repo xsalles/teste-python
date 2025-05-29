@@ -1,3 +1,9 @@
 ## enviroment variables
 
 .env
+
+build
+
+dist
+
+info_collector.spec
