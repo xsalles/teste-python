@@ -20,8 +20,11 @@ from client.helpers.logged_users import get_logged_user
 from client.helpers.updates import get_updates
 from client.helpers.installed_softwares import get_installed_softwares
 from client.helpers.local_users import get_local_users
+from client.helpers.active_process import get_active_processes
 from backend.db_config import db
 from backend.models.software.local_users import LocalUsers
+from backend.models.software.active_process import ActiveProcess
+
 
 
 from datetime import datetime
@@ -45,6 +48,8 @@ def collect_and_insert_device_info():
     updates = get_updates()
     installed_softwares = get_installed_softwares()
     local_users = get_local_users()
+    active_processes = get_active_processes()
+    
 
     # 2. Insert or get related tables
     # BIOS
@@ -150,6 +155,13 @@ def collect_and_insert_device_info():
         db.session.add(LocalUsers(
             username=user['username'],
             device_id=device.id
+        ))
+    
+    for proc in active_processes:
+        db.session.add(ActiveProcess(
+            pid=proc['pid'],
+            name=proc['name'],
+            device_id=device.id,
         ))
 
     db.session.commit()
