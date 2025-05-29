@@ -19,7 +19,9 @@ from client.helpers.network import get_network_info
 from client.helpers.logged_users import get_logged_user
 from client.helpers.updates import get_updates
 from client.helpers.installed_softwares import get_installed_softwares
+from client.helpers.local_users import get_local_users
 from backend.db_config import db
+from backend.models.software.local_users import LocalUsers
 
 
 from datetime import datetime
@@ -42,6 +44,7 @@ def collect_and_insert_device_info():
     logged_users = get_logged_user()
     updates = get_updates()
     installed_softwares = get_installed_softwares()
+    local_users = get_local_users()
 
     # 2. Insert or get related tables
     # BIOS
@@ -141,6 +144,12 @@ def collect_and_insert_device_info():
             username=user.get('username'),
             logon_time=user.get('logon_time'),
             device_id = device.id
+        ))
+        
+    for user in local_users:
+        db.session.add(LocalUsers(
+            username=user['username'],
+            device_id=device.id
         ))
 
     db.session.commit()
