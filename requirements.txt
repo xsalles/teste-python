@@ -5,3 +5,4 @@ pymysql
 requests
 dotenv
 psutil
+pywin32
