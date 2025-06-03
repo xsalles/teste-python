@@ -6,3 +6,4 @@ requests
 dotenv
 psutil
 pywin32
+mysql-connector-python
