@@ -16,7 +16,7 @@ def get_db_connection():
         port=int(os.getenv('DB_PORT'))
     )
 
-@app.route('/device', methods=['POST'])
+@app.route('/device/android', methods=['POST'])
 def insert_device_info():
     data = request.get_json()
     if not data:
@@ -59,7 +59,7 @@ def insert_device_info():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
-@app.route('/devices', methods=['GET'])
+@app.route('/devices/android', methods=['GET'])
 def get_all_devices():
     try:
         conn = get_db_connection()
@@ -69,6 +69,22 @@ def get_all_devices():
         cursor.close()
         conn.close()
         return jsonify(rows), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/device/android/<int:device_id>', methods=['GET'])
+def get_device_by_id(device_id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute('SELECT * FROM device_data WHERE id = %s', (device_id,))
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        if row:
+            return jsonify(row), 200
+        else:
+            return jsonify({'error': 'Device not found'}), 404
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
