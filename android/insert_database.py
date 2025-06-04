@@ -58,6 +58,19 @@ def insert_device_info():
         return jsonify({'status': 'success'}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/devices', methods=['GET'])
+def get_all_devices():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute('SELECT * FROM device_data')
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return jsonify(rows), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
