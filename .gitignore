@@ -7,3 +7,6 @@ build
 dist
 
 info_collector.spec
+
+androidApp/Dockerfile
+androidApp/buildozer.spec

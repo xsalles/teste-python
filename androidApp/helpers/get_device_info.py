@@ -1,4 +1,4 @@
-from android.util.run_cmd import run_cmd
+from util.run_cmd import run_cmd
 
 def get_device_info():
     return {

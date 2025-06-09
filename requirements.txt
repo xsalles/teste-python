@@ -6,3 +6,6 @@ requests
 dotenv
 psutil
 mysql-connector-python
+kivy
+plyer
+python-dotenv
